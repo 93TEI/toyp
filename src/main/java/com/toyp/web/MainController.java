@@ -6,6 +6,7 @@ import com.toyp.web.Dto.PostsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +31,13 @@ public class MainController {
     public Long save(){
         PostsDto temp = new PostsDto("this is title","im author","content!");
         return ps.save(temp);
+    }
+
+    @GetMapping("/maze")
+    public int[][] maze(Model model){
+        //미로 사이즈 input받아서 만들어주기
+        int n=4;
+        int m = 5;
+        return ps.createMaze(n,m);
     }
 }
