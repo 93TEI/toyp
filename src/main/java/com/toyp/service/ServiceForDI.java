@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Configuration
 //@Service
-public class ServiceForDI {
+public class ServiceForDI { //빈 주입 연습하려고 일부러 만들어봄
 
     //@Bean은 메소드에서 반환되는 객체를 Bean으로 만들고
     //@Component는 클래스를 Bean으로 만든다
+
     @Bean
     public PostsDto createDto(){
         return new PostsDto("service","0325tei","for DI");
