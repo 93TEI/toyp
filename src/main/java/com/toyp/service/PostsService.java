@@ -1,5 +1,7 @@
 package com.toyp.service;
 
+import com.toyp.domain.Posts.Maze;
+import com.toyp.domain.Posts.MazeRepository;
 import com.toyp.domain.Posts.PostRepository;
 import com.toyp.web.Dto.PostsDto;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.Queue;
 public class PostsService {
 
     private final PostRepository pr;
+    private final MazeRepository mr;
 
     @Transactional
     public Long save(PostsDto requestDto){
@@ -68,6 +71,8 @@ public class PostsService {
             }
         }
         System.out.println("향해한 기간 : "+cnt+"일");
+
+        mr.save(new Maze("tei",4,5,cnt));
 
         return graph;
     }

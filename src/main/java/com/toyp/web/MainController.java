@@ -21,7 +21,7 @@ public class MainController {
 
     @GetMapping("/home")
     public List<String> home(){
-        //ApplicationContext,@Configuration,@Bean을 사용한 DI. 이거 없이 걍 넣으면 널포인트익셉션 뜸
+        //ApplicationContext,@Configuration,@Bean을 사용한 DI. 이거 없이 걍 넣으면 DI 못해서 널포인트익셉션 뜸
         ApplicationContext context = new AnnotationConfigApplicationContext(ServiceForDI.class);
         ps.save(context.getBean("createDto",PostsDto.class));
         return Arrays.asList("Arrays.asList","Hello");
