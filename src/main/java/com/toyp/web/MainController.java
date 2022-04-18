@@ -40,4 +40,12 @@ public class MainController {
         int m = 5;
         return ps.createMaze(n,m);
     }
+
+    //jwt config pratice
+    @GetMapping("/jwt")
+    public String jwt_login(){
+        return "s";
+    }
+
+
 }
