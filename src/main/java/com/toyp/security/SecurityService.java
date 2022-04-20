@@ -27,12 +27,10 @@ public class SecurityService {
         if(expTime <=0){
             throw new RuntimeException("만료시간 다 됐음");
         }
-        System.out.println("sss");
         // 서명 알고리즘 선택
         SignatureAlgorithm sa = SignatureAlgorithm.HS256;
         byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
         Key signingKey = new SecretKeySpec(secretKeyBytes,sa.getJcaName()); // 키가 만들어짐
-        System.out.println("sss");
         //만든 키 리턴
         return Jwts.builder()
                 .setSubject(subject)

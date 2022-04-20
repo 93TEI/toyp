@@ -25,7 +25,7 @@ public class PostsService {
         return pr.save(requestDto.toEntity()).getId();
     }
 
-    public int[][] createMaze(int n, int m){
+    public int[][] createMaze(int n, int m, String name){
         class Location{
             int row, col;
             Location(int row, int col){
@@ -71,7 +71,7 @@ public class PostsService {
         }
         System.out.println("향해한 기간 : "+cnt+"일");
 
-        mr.save(new Maze("tei",4,5,cnt));
+        mr.save(new Maze(name,4,5,cnt));
 
         return graph;
     }

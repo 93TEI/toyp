@@ -24,14 +24,14 @@ public class Maze {
 
     private int col_m;
 
-    private int day_m;
+    private int day;
 
     @Builder
     public Maze(String name, int row, int col, int day){
         this.name_m = name;
         this.row_m = row;
         this.col_m = col;
-        this.day_m = day;
+        this.day = day;
     }
 
 }

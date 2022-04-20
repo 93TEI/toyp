@@ -18,11 +18,9 @@ public class SecurityController {
     // 기본 id는 user, pw는 터미널에 뜨는 generated security password 넣으면 됨
     @GetMapping("/create/token")
     public Map<String, Object> createToken(@RequestParam(value = "subject") String subject){
-        System.out.println("sss");
         String token = ss.createToken(subject,(2*1000*60)); // 만료시간 : 2분
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("result",token);
-        System.out.println("sss");
         return map;
     }
 
