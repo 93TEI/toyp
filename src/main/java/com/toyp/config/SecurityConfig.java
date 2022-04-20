@@ -16,6 +16,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests() // url별 권한 관리 설정의 시작점
-                    .antMatchers("/maze").permitAll();
+                    .antMatchers("/maze","login/**").permitAll();
     }
 }

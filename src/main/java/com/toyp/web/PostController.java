@@ -1,6 +1,6 @@
 package com.toyp.web;
 
-import com.toyp.service.PostsService;
+import com.toyp.service.PostService;
 import com.toyp.service.ServiceForDI;
 import com.toyp.web.Dto.PostsDto;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +16,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class MainController {
+public class PostController {
 
-    private final PostsService ps;
+    private final PostService ps;
 
     @GetMapping("/home")
     public List<String> home(){
@@ -33,20 +33,4 @@ public class MainController {
         PostsDto temp = new PostsDto("this is title","im author","content!");
         return ps.save(temp);
     }
-
-    @GetMapping("/maze")
-    public int[][] maze(@RequestParam(value = "name") String name, Model model){
-        //미로 사이즈 input받아서 만들어주기
-        int n=4;
-        int m = 5;
-        return ps.createMaze(n,m,name);
-    }
-
-    //jwt config pratice
-    @GetMapping("/jwt")
-    public String jwt_login(){
-        return "s";
-    }
-
-
 }

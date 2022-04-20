@@ -2,28 +2,17 @@ package com.toyp.service;
 
 import com.toyp.domain.Posts.Maze;
 import com.toyp.domain.Posts.MazeRepository;
-import com.toyp.domain.Posts.PostRepository;
-import com.toyp.web.Dto.PostsDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
-public class PostsService {
+public class MazeService {
 
-    private final PostRepository pr;
     private final MazeRepository mr;
-
-    @Transactional
-    public Long save(PostsDto requestDto){
-        return pr.save(requestDto.toEntity()).getId();
-    }
 
     public int[][] createMaze(int n, int m, String name){
         class Location{
@@ -40,11 +29,14 @@ public class PostsService {
         int[] yArr = {0,1,0,-1};
         int cnt = 0;
 
+        // 향해 좌표의 확률 정해주기
         for(int i =0; i< n; i++){
             for(int j=0; j<m; j++){
-                graph[i][j] = (int) (Math.random()*10 >= 5 ? 1 : 0);
+                graph[i][j] = (int) (Math.random()*10 >= 4 ? 1 : 0);
             }
         }
+        // 시작점 출항 확률 정해주기
+        graph[0][0] = (int)(Math.random()*10 >= 3 ? 1 : 0);
 
         Queue<Location> q = new LinkedList<>();
         if(graph[0][0] == 1) {
@@ -71,7 +63,7 @@ public class PostsService {
         }
         System.out.println("향해한 기간 : "+cnt+"일");
 
-        mr.save(new Maze(name,4,5,cnt));
+        mr.save(new Maze(name,n,m,cnt));
 
         return graph;
     }

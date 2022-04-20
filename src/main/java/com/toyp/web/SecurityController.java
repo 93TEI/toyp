@@ -1,5 +1,6 @@
-package com.toyp.security;
+package com.toyp.web;
 
+import com.toyp.security.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@RequestMapping("/security")
+@RequestMapping("/login")
 @RestController
 public class SecurityController {
     @Autowired
