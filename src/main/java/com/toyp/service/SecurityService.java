@@ -1,6 +1,5 @@
 package com.toyp.service;
 
-import com.toyp.config.EnumRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

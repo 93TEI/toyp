@@ -2,6 +2,7 @@ package com.toyp.web;
 
 import com.toyp.domain.Posts.Member;
 import com.toyp.domain.Posts.MemberRepository;
+import com.toyp.service.LoginService;
 import com.toyp.service.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,25 +18,32 @@ import java.util.Map;
 public class SecurityController {
 
     private final SecurityService ss;
-    private final MemberRepository mr;
+    private final LoginService ls;
     private final PasswordEncoder pe;
+    private final MemberRepository mr;
 
     // 기본 id는 user, pw는 터미널에 뜨는 generated security password 넣으면 됨
     @GetMapping("/signin")
-    public Map<String, Object> createToken(@RequestParam("name") String name,@RequestParam("pw") String pw){
-        // 저장 후 토큰 생성
-        mr.save(new Member(name,pe.encode(pw)));
-        String token = ss.createToken(name,(2*1000*60)); // 만료시간 : 2분
-        Map<String,Object> map = new LinkedHashMap<>();
-        map.put("result",token);
-        return map;
+    public Member SignIn(@RequestParam("name") String name, @RequestParam("pw") String pw){
+        // 회원가입
+        ls.MemberSave(name,pe.encode(pw));
+        return mr.findByNameMemEquals(name);
+
+        //return (s+"님의 가입을 환영합니다.");
     }
 
     @GetMapping("/login")
-    public Map<String,Object> getSubject(@RequestParam("token") String token){
-        String subject = ss.getSubject(token);
+    public Map<String,Object> Login(@RequestParam("token") String token){
+        /*
+        String token = ss.createToken(name,(2*1000*60)); // 만료시간 : 2분
         Map<String,Object> map = new LinkedHashMap<>();
-        map.put("result",subject);
+        map.put("result",token);
+
+         */
+
+        String userInfo = ss.getSubject(token);
+        Map<String,Object> map = new LinkedHashMap<>();
+        map.put("result",userInfo);
         return map;
     }
 }
