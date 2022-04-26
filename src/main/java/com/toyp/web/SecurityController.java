@@ -24,16 +24,14 @@ public class SecurityController {
 
     // 기본 id는 user, pw는 터미널에 뜨는 generated security password 넣으면 됨
     @GetMapping("/signin")
-    public Member SignIn(@RequestParam("name") String name, @RequestParam("pw") String pw){
+    public String SignIn(@RequestParam("name") String name, @RequestParam("pw") String pw){
         // 회원가입
         ls.MemberSave(name,pe.encode(pw));
-        return mr.findByNameMemEquals(name);
-
-        //return (s+"님의 가입을 환영합니다.");
+        return (mr.findByNameMemEquals(name).get().getNameMem()+"님의 가입이 완료되었습니다.");
     }
 
     @GetMapping("/login")
-    public Map<String,Object> Login(@RequestParam("token") String token){
+    public String Login(@RequestParam("name") String name, @RequestParam("pw") String pw){
         /*
         String token = ss.createToken(name,(2*1000*60)); // 만료시간 : 2분
         Map<String,Object> map = new LinkedHashMap<>();
@@ -41,10 +39,16 @@ public class SecurityController {
 
          */
 
-        String userInfo = ss.getSubject(token);
+        /*
+        String userInfo = ss.getSubject(name);
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("result",userInfo);
         return map;
+         */
+
+        return ls.ValidationPassword(name, pw) + "님의 검증이 완료되었습니다 ";
+
+        //validation
     }
 }
 
