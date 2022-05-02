@@ -17,6 +17,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_mb;
 
+    @NonNull
     private String nameMem;
 
     @Column(nullable = false)
@@ -25,10 +26,14 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private EnumRole role;
 
+    private String jwt;
+
+
     @Builder
-    public Member(String name, String pw, EnumRole role){
+    public Member(String name, String pw, EnumRole role, String jwt){
         this.nameMem = name;
         this.password = pw;
         this.role = role;
+        this.jwt = jwt;
     }
 }

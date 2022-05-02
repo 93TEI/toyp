@@ -46,7 +46,12 @@ public class SecurityController {
         return map;
          */
 
-        return ls.ValidationPassword(name, pw) + "님의 검증이 완료되었습니다 ";
+        //이름(id) 검증 후 pw 검증하여 둘 다 검증 통과하면 JWT token 발행
+        String jwt = ls.Validation(name, pw);
+
+        //jwt 멤버 디티오에 담아서 프론트로 넘기자
+
+        return  + "님의 검증이 완료되었습니다 ";
 
         //validation
     }

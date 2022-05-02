@@ -30,7 +30,7 @@ public class LoginService {
 
     // findByEmail로 비번 get해서 검증 -> if문 처리로 아닐 때 exception, 맞을 때 토큰 발행
     @Transactional
-    public String ValidationPassword(String name, String pw) throws UsernameNotFoundException {
+    public String Validation(String name, String pw) throws UsernameNotFoundException {
 
         // name 검증
         String pwFromDB = mr.findByNameMemEquals(name)
