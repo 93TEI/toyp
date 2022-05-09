@@ -3,11 +3,14 @@ package com.toyp.service;
 import com.toyp.config.EnumRole;
 import com.toyp.domain.Posts.Member;
 import com.toyp.domain.Posts.MemberRepository;
+import com.toyp.web.Dto.MemDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.toyp.config.EnumRole.ROLE_USER;
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +26,7 @@ public class LoginService {
         mr.save(Member.builder()
                 .name(name)
                 .pw(pw)
-                .role(EnumRole.ROLE_USER)
+                .role(ROLE_USER)
                 .build());
         return "s";
     }

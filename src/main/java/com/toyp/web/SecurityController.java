@@ -1,9 +1,11 @@
 package com.toyp.web;
 
+import com.toyp.config.EnumRole;
 import com.toyp.domain.Posts.Member;
 import com.toyp.domain.Posts.MemberRepository;
 import com.toyp.service.LoginService;
 import com.toyp.service.SecurityService;
+import com.toyp.web.Dto.MemDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,26 +34,13 @@ public class SecurityController {
 
     @GetMapping("/login")
     public String Login(@RequestParam("name") String name, @RequestParam("pw") String pw){
-        /*
-        String token = ss.createToken(name,(2*1000*60)); // 만료시간 : 2분
-        Map<String,Object> map = new LinkedHashMap<>();
-        map.put("result",token);
-
-         */
-
-        /*
-        String userInfo = ss.getSubject(name);
-        Map<String,Object> map = new LinkedHashMap<>();
-        map.put("result",userInfo);
-        return map;
-         */
 
         //이름(id) 검증 후 pw 검증하여 둘 다 검증 통과하면 JWT token 발행
         String jwt = ls.Validation(name, pw);
 
         //jwt 멤버 디티오에 담아서 프론트로 넘기자
-
-        return  + "님의 검증이 완료되었습니다 ";
+        MemDto validMem = new MemDto(name,pw, EnumRole.ROLE_USER,jwt);
+        return  validMem.getNameMem() + "님의 검증이 완료되었습니다 ";
 
         //validation
     }
