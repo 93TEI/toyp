@@ -20,6 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests() // url별 권한 관리 설정의 시작점
                     .antMatchers("/maze","login/**").permitAll();
+                .anyRequest().authenticated()
+                    .and()
+                        .apply(new JwtSecurityConfig(tokenProvider));
     }
     // 구현해줘야 PasswordEncoder 쓸 수 있음
     @Bean
